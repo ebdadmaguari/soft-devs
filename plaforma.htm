@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BR Concursos</title>
+  <!-- Add Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* CSS Geral */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #003366;
+      color: #fff;
+      padding: 15px 20px;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: #FFD700;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 10px;
+      position: relative;
+    }
+
+    .cta-buttons a, .cta-buttons button {
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+    }
+
+    .cta-buttons .btn-primary {
+      background-color: #FFA500;
+    }
+
+    .cta-buttons .btn-primary:hover {
+      background-color: #ff8c00;
+    }
+
+    .cta-buttons .btn-secondary {
+      background-color: transparent;
+      border: 2px solid #fff;
+    }
+
+    .cta-buttons .btn-secondary:hover {
+      background-color: #fff;
+      color: #003366;
+    }
+
+    .hero {
+      background: linear-gradient(to right, #003366, #00509e);
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #FFA500;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero .btn:hover {
+      background-color: #ff8c00;
+    }
+
+    .menu-container {
+      width: 250px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 10px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .menu-container h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .menu-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .menu-list li {
+      margin-bottom: 10px;
+    }
+
+    .menu-list a {
+      text-decoration: none;
+      color: #00509e;
+      font-size: 16px;
+    }
+
+    .menu-list a:hover {
+      text-decoration: underline;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-aluno, .btn-entrar {
+      padding: 8px 10px;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-aluno {
+      background-color: #FF4500;
+    }
+
+    .btn-aluno:hover {
+      background-color: #cc3700;
+    }
+
+    .btn-entrar {
+      background-color: #00509e;
+    }
+
+    .btn-entrar:hover {
+      background-color: #003366;
+    }
+
+    .courses {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .courses h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .course-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .course-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .course-card-content {
+      padding: 20px;
+    }
+
+    .course-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .course-card p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .course-card .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #00509e;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .course-card .btn:hover {
+      background-color: #003366;
+    }
+
+    .news-section, .tech-section {
+      padding: 60px 20px;
+      background-color: #f5f5f5;
+    }
+
+    .tech-section {
+      background-color: #fff;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      color: #003366;
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .news-grid, .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .news-card, .tech-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .tech-card {
+      background: #f8f9fa;
+    }
+
+    .news-card:hover, .tech-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .news-card img, .tech-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-content h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #003366;
+    }
+
+    .card-content p {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .read-more {
+      color: #00509e;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .read-more:hover {
+      color: #003366;
+    }
+
+    footer {
+      background-color: #003366;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+      
+      .course-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .news-grid, .tech-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+      }
+    }
+
+    /* Add icon styles */
+    .icon {
+      margin-right: 8px;
+      color: inherit;
+    }
+
+    .section-title .icon {
+      font-size: 36px;
+      color: #003366;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .card-meta .icon {
+      margin-right: 5px;
+      color: #888;
+    }
+
+    .logo .icon {
+      color: #FFD700;
+      margin-right: 10px;
+    }
+
+    .nav a .icon {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="icon fas fa-graduation-cap"></i>BR Concursos
+      </div>
+      <nav class="nav">
+        <a href="#"><i class="icon fas fa-home"></i>Início</a>
+        <a href="#"><i class="icon fas fa-star"></i>Vantagens</a>
+        <a href="#"><i class="icon fas fa-book"></i>Cursos</a>
+        <a href="#"><i class="icon fas fa-users"></i>Quem Somos</a>
+        <a href="#"><i class="icon fas fa-envelope"></i>Fale Conosco</a>
+      </nav>
+      <div class="cta-buttons">
+        <button class="btn-primary" onclick="toggleMenu()">
+          <i class="icon fas fa-user-graduate"></i>Área do Aluno
+        </button>
+        <a href="#" class="btn-secondary">
+          <i class="icon fas fa-sign-in-alt"></i>Entrar ou Cadastrar
+        </a>
+
+        <!-- Menu da Área do Aluno -->
+        <div class="menu-container" id="menu">
+          <h3><i class="icon fas fa-bars"></i>Menu</h3>
+          <ul class="menu-list">
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Vantagens</a></li>
+            <li><a href="#">Cursos</a></li>
+            <li><a href="#">Quem Somos</a></li>
+            <li><a href="#">Fale Conosco</a></li>
+          </ul>
+          <h3>Área Restrita</h3>
+          <div class="action-buttons">
+            <button class="btn-aluno">Área do Aluno</button>
+            <button class="btn-entrar">Entrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1><i class="icon fas fa-trophy"></i>BR Concursos: Nossas Questões, Sua Aprovação!</h1>
+    <p>Tenha acesso exclusivo para soltar seu grito de liberdade e realizar o sonho do cargo público.</p>
+    <button class="btn">
+      <i class="icon fas fa-check-circle"></i>Assine Já
+    </button>
+  </section>
+
+  <!-- Cursos -->
+  <section class="courses">
+    <h2>Conheça nossos Simulados</h2>
+    <div class="course-cards">
+      <div class="course-card">
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500" alt="Curso 1">
+        <div class="course-card-content">
+          <h3>Curso de Simulados ENAM 2ª Edição</h3>
+          <p>R$ 49,90</p>
+          <button class="btn">Informações e Inscrição</button>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=500" alt="Curso 2">
+        <div class="course-card-content">
+          <h3>Curso ENAM Rodada 02</h3>
+          <p>R$ 49,90</p>
+          <button class="btn">Informações e Inscrição</button>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=500" alt="Curso 3">
+        <div class="course-card-content">
+          <h3>Curso ENAM Combo</h3>
+          <p>Grátis</p>
+          <button class="btn">Informações e Inscrição</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section class="news-section">
+    <div class="section-title">
+      <i class="icon fas fa-newspaper"></i>
+      <h2>Últimas Notícias</h2>
+      <p>Fique por dentro das últimas atualizações sobre concursos públicos e oportunidades</p>
+    </div>
+    <div class="news-grid">
+      <article class="news-card">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=500" alt="Notícia Concurso">
+        <div class="card-content">
+          <h3>Novo Concurso Federal Anunciado</h3>
+          <p>Ministério da Educação anuncia concurso com mais de 1.000 vagas para diferentes áreas.</p>
+          <div class="card-meta">
+            <span><i class="icon far fa-calendar"></i>15 Mar 2024</span>
+            <a href="#" class="read-more">Ler mais <i class="icon fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <article class="news-card">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500" alt="Dicas de Estudo">
+        <div class="card-content">
+          <h3>Dicas de Estudo para Concursos</h3>
+          <p>Confira as melhores estratégias para otimizar seus estudos e aumentar suas chances de aprovação.</p>
+          <div class="card-meta">
+            <span><i class="icon far fa-calendar"></i>14 Mar 2024</span>
+            <a href="#" class="read-more">Ler mais <i class="icon fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <article class="news-card">
+        <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=500" alt="Carreira Pública">
+        <div class="card-content">
+          <h3>Carreira Pública em Alta</h3>
+          <p>Pesquisa mostra aumento na procura por carreiras públicas entre jovens profissionais.</p>
+          <div class="card-meta">
+            <span><i class="icon far fa-calendar"></i>13 Mar 2024</span>
+            <a href="#" class="read-more">Ler mais <i class="icon fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Technology Section -->
+  <section class="tech-section">
+    <div class="section-title">
+      <i class="icon fas fa-laptop-code"></i>
+      <h2>Tecnologia e Inovação</h2>
+      <p>Recursos tecnológicos para potencializar seus estudos</p>
+    </div>
+    <div class="tech-grid">
+      <article class="tech-card">
+        <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=500" alt="Plataforma Digital">
+        <div class="card-content">
+          <h3>Plataforma Digital</h3>
+          <p>Nossa plataforma utiliza inteligência artificial para personalizar seu plano de estudos.</p>
+          <div class="card-meta">
+            <span><i class="icon fas fa-microchip"></i>Tecnologia</span>
+            <a href="#" class="read-more">Saiba mais <i class="icon fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <article class="tech-card">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500" alt="App Mobile">
+        <div class="card-content">
+          <h3>App Mobile</h3>
+          <p>Estude em qualquer lugar com nosso aplicativo móvel disponível para iOS e Android.</p>
+          <div class="card-meta">
+            <span><i class="icon fas fa-mobile-alt"></i>Mobile</span>
+            <a href="#" class="read-more">Saiba mais <i class="icon fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <article class="tech-card">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=500" alt="Análise de Desempenho">
+        <div class="card-content">
+          <h3>Análise de Desempenho</h3>
+          <p>Acompanhe seu progresso com gráficos detalhados e relatórios personalizados.</p>
+          <div class="card-meta">
+            <span><i class="icon fas fa-chart-line"></i>Analytics</span>
+            <a href="#" class="read-more">Saiba mais <i class="icon fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <i class="icon fas fa-copyright"></i>2025 softdev web. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('menu');
+      const button = document.querySelector('.btn-primary');
+      if (!menu.contains(event.target) && event.target !== button) {
+        menu.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
